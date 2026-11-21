@@ -28,6 +28,24 @@ When I initially read the blackdevice tutorial, I thought "eeu", we won't host a
 Then I tried to create a 1Password account to share with my flatmates with the pi's login info, and 
 you have to pay, so then I decided that this will be one of our services.
 
+I went with vaultwarden, because... shocker, that's what the tutorial recommended. 
+
+Due to my eduroam issue, I can't directly pull images from the internet to my pi. So I have to pull 
+it on my (Intel, important for later) laptop and transfer it to the pi using portainer. When doing 
+this, the images wouldn't work. After inspecting the logs (like a caveman who hasn't heard about 
+generative AI), I saw that I was getting an "exec format error". After googling, I stumbled across 
+[this](https://stackoverflow.com/questions/73285601/docker-exec-usr-bin-sh-exec-format-error) 
+stackoverflow page, pulled the arm image, and it worked!
+
+The tutorial wanted me to use nginx, and who am I to argue. I'm like 80% certain what this does, 
+will have to watch another Youtube video about it. Anyways, I did the following:
+- Generate a self-signed ssl certificate using openssl
+- Create a nginx config file
+- Create a new "stack" (like a docker compose) for the nginx server, running on the vaultwarden 
+network.
+-Allowing me to connect to vaultwarden on my local network!!!
+
+
 ## Resources
 - https://www.youtube.com/watch?v=kF0ofY5x5qk
 - https://blackdevice.com/turn-a-raspberry-pi-into-a-multi-service-home-server-with-docker-and-portainer/
